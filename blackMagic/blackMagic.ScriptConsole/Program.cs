@@ -27,7 +27,17 @@ namespace blackMagic.ScriptConsole
 
             var scriptLoader = new ScriptLoader();
 
-            scriptLoader.Execute(File.ReadAllText(filename));
+            scriptLoader.RegisterConsole((str) => Console.WriteLine(str));
+
+            try
+            {
+                scriptLoader.Execute(File.ReadAllText(filename));
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+            }
+
 #if DEBUG
             Console.ReadLine();
 #endif

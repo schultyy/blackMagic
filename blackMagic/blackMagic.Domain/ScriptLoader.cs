@@ -24,5 +24,15 @@ namespace blackMagic.Domain
         {
             context.SetGlobal(name, value);
         }
+
+        //public void RegisterFunction<T>(string name, T function) where T : Func<>
+        //{
+        //    int parameterCount = function.Method.GetParameters().Count();
+        //    context.SetGlobal(name, IronJS.Native.Utils.CreateFunction(context.Environment, parameterCount, function));
+        //}
+        public void RegisterConsole(Action<string> func)
+        {
+            context.SetGlobal("console", IronJS.Native.Utils.CreateFunction(context.Environment, 1, func));
+        }
     }
 }
