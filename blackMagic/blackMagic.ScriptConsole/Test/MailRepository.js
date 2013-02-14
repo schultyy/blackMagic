@@ -1,4 +1,13 @@
-﻿console(emailRepository.GetMails);
-var inbox = GetMails("Inbox");
+﻿var mailFolder = "Inbox";
 
-console(inbox);
+print(mailFolder);
+
+var repository = new MailRepository();
+
+print(repository);
+
+var folders = repository.getFolderNames();
+
+for (var i = 0; i < folders.length; i++) {
+    print(folders[i]);
+}
