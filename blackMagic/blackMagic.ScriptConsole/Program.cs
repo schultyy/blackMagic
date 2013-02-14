@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.Office.Interop.Outlook;
 using blackMagic.Domain;
+using blackMagic.Outlook;
+using blackMagic.Repositories;
+using Exception = System.Exception;
 
 namespace blackMagic.ScriptConsole
 {
@@ -27,7 +32,20 @@ namespace blackMagic.ScriptConsole
 
             var scriptLoader = new ScriptLoader();
 
-            scriptLoader.RegisterConsole((str) => Console.WriteLine(str));
+            var repository = new MailRepository(GetOutlookApplication());
+
+            //dynamic repository = new ExpandoObject();
+            //repository.GetMails = new Func<string, dynamic>(str =>
+            //                                                    {
+            //                                                        return "blah";
+            //                                                        dynamic exp = new ExpandoObject();
+            //                                                        exp.Subject = "blah";
+            //                                                        return new[] { exp };
+            //                                                    });
+
+            scriptLoader.RegisterFunction<string, IEnumerable<IOutlookMail>>("GetMails", repository.GetMails);
+
+            scriptLoader.RegisterConsole(Console.WriteLine);
 
             try
             {
@@ -41,6 +59,12 @@ namespace blackMagic.ScriptConsole
 #if DEBUG
             Console.ReadLine();
 #endif
+        }
+
+        private static Application GetOutlookApplication()
+        {
+            var application = new Application();
+            return application;
         }
     }
 }

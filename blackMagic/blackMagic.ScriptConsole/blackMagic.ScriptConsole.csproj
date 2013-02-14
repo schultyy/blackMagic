@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,9 +58,22 @@
       <Project>{35BD5C8C-62F9-4DAF-A8A2-1A0732660E89}</Project>
       <Name>blackMagic.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\blackMagic.Outlook\blackMagic.Outlook.csproj">
+      <Project>{2E99A019-A05E-4598-B60A-6A9DA840B4C7}</Project>
+      <Name>blackMagic.Outlook</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\blackMagic.Repositories\blackMagic.Repositories.csproj">
+      <Project>{2D87064E-02B6-4EF2-8327-EAEF797C2F41}</Project>
+      <Name>blackMagic.Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Test\Console.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Test\MailRepository.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
