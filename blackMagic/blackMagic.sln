@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blackMagic.ScriptConsole", "blackMagic.ScriptConsole\blackMagic.ScriptConsole.csproj", "{85653F44-42BF-4AA9-89A6-BF6718F77465}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blackMagic.Lib", "blackMagic.Lib\blackMagic.Lib.csproj", "{CA116A18-3CCF-4D9A-A44F-3B3972E6CC4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libMagic", "libMagic\libMagic.csproj", "{CA116A18-3CCF-4D9A-A44F-3B3972E6CC4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
