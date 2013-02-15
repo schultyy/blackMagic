@@ -8,20 +8,6 @@ using Microsoft.Office.Interop.Outlook;
 
 namespace blackMagic.Outlook
 {
-    public class MailRepositoryConstructor : ClrFunction
-    {
-        public MailRepositoryConstructor(ScriptEngine engine)
-            : base(engine.Function.InstancePrototype, "MailRepositoryInstance", new MailRepositoryInstance(engine.Object.InstancePrototype))
-        {
-        }
-
-        [JSConstructorFunction]
-        public MailRepositoryInstance Construct()
-        {
-            return new MailRepositoryInstance(this.InstancePrototype);
-        }
-    }
-
     public class MailRepositoryInstance : ObjectInstance
     {
         private Application application;
@@ -79,59 +65,6 @@ namespace blackMagic.Outlook
                                      Subject = c.Subject
                                  }).ToArray();
             return Engine.Array.New(mails);
-        }
-    }
-
-    public class FolderConstructor : ClrFunction
-    {
-        public FolderConstructor(ScriptEngine engine)
-            : base(engine.Function.Prototype, "FolderInstance", new FolderInstance(engine.Object.InstancePrototype))
-        {
-
-        }
-
-        [JSConstructorFunction]
-        public FolderInstance Construct(string name, string uniqueId)
-        {
-            return new FolderInstance(InstancePrototype)
-                       {
-                           UniqueId = uniqueId,
-                           Name = name
-                       };
-        }
-    }
-
-    public class FolderInstance : ObjectInstance
-    {
-        [JSField]
-        public string UniqueId;
-
-        public string Name { get; set; }
-
-        public FolderInstance(ObjectInstance prototype)
-            : base(prototype)
-        {
-            this.PopulateFields();
-            this.PopulateFunctions();
-        }
-
-        [JSFunction(Name = "toString")]
-        public override string ToString()
-        {
-            return Name;
-        }
-    }
-
-    public class EMail : ObjectInstance
-    {
-        public string UniqueId { get; set; }
-
-        public string Subject { get; set; }
-
-        public EMail(ObjectInstance prototype)
-            : base(prototype)
-        {
-
         }
     }
 }
