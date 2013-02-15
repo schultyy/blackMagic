@@ -46,8 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
     <Compile Include="IO\FileHandle.cs" />
-    <Compile Include="Outlook\EMail.cs" />
+    <Compile Include="Outlook\EmailInstance.cs" />
     <Compile Include="Outlook\FolderConstructor.cs" />
     <Compile Include="Outlook\FolderInstance.cs" />
     <Compile Include="Outlook\MailRepositoryConstructor.cs" />

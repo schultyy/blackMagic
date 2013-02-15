@@ -109,7 +109,11 @@ namespace libMagic.Outlook
                 .Select(c => new EmailInstance(null)
                                  {
                                      UniqueId = c.EntryID,
-                                     Subject = c.Subject
+                                     Subject = c.Subject,
+                                     Sender = c.SenderEmailAddress,
+                                     Recipients = c.Recipients.Cast<Recipient>().Select(r => r.Address).ToArray(),
+                                     SendOn = c.SentOn,
+                                     ReceivedOn = c.ReceivedTime
                                  }).ToArray();
             return Engine.Array.New(mails);
         }

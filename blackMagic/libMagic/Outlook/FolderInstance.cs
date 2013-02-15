@@ -6,20 +6,20 @@ namespace libMagic.Outlook
     {
         public string UniqueId
         {
-            get { return this.GetPropertyValue("UniqueId") as string; }
-            set { SetPropertyValue("UniqueId", value, true); }
+            get { return this.GetPropertyValue(() => UniqueId) as string; }
+            set { this.SetPropertyValue(() => UniqueId, value); }
         }
 
         public string Name
         {
-            get { return this.GetPropertyValue("Name") as string; }
-            set { SetPropertyValue("Name", value, true); }
+            get { return this.GetPropertyValue(() => Name) as string; }
+            set { this.SetPropertyValue(() => Name, value); }
         }
 
         public string FolderType
         {
-            get { return GetPropertyValue("FolderType") as string; }
-            set { SetPropertyValue("FolderType", value, true); }
+            get { return this.GetPropertyValue(() => FolderType) as string; }
+            set { this.SetPropertyValue(() => FolderType, value); }
         }
 
         public FolderInstance(ObjectInstance prototype)
