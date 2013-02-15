@@ -21,7 +21,14 @@ namespace libMagic
             instance.SetPropertyValue(property.GetMemberInfo().Name, value, true);
         }
 
-        public static MemberInfo GetMemberInfo(this Expression expression)
+        public static DateInstance Construct(this DateConstructor constructor, DateTime date)
+        {
+            var dateInstance = constructor.Construct(date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second,
+                                         date.Millisecond);
+            return dateInstance;
+        }
+
+        private static MemberInfo GetMemberInfo(this Expression expression)
         {
             LambdaExpression lambdaExpression = (LambdaExpression)expression;
             return (!(lambdaExpression.Body is UnaryExpression) ? (MemberExpression)lambdaExpression.Body : (MemberExpression)((UnaryExpression)lambdaExpression.Body).Operand).Member;

@@ -29,15 +29,15 @@ namespace libMagic.Outlook
             set { this.SetPropertyValue(() => Recipients, value); }
         }
 
-        public DateTime ReceivedOn
+        public DateInstance ReceivedOn
         {
-            get { return (DateTime)this.GetPropertyValue(() => ReceivedOn); }
+            get { return this.GetPropertyValue(() => ReceivedOn) as DateInstance; }
             set { this.SetPropertyValue(() => ReceivedOn, value); }
         }
 
-        public DateTime SendOn
+        public DateInstance SendOn
         {
-            get { return (DateTime)this.GetPropertyValue(() => SendOn); }
+            get { return this.GetPropertyValue(() => SendOn) as DateInstance; }
             set { this.SetPropertyValue(() => SendOn, value); }
         }
 

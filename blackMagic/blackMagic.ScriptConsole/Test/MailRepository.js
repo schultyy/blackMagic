@@ -23,6 +23,6 @@ for (var i = 0; i < items.length; i++) {
     console.log("Subject: " + items[i].Subject);
     console.log("Send from: " + items[i].Sender);
     console.log("Recipients: " + items[i].Recipients.join());
-    console.log("SendOn: " + items[i].SentOn.toString());
-    console.log("Received on: " + items[i].ReceivedOn.toString());
+    console.log("SendOn: " + items[i].SentOn);
+    console.log("Received on: " + items[i].ReceivedOn);
 }

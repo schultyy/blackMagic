@@ -10,6 +10,7 @@ namespace libMagic
         public ScriptLoader()
         {
             this.engine = new Jurassic.ScriptEngine();
+            this.engine.EnableDebugging = true;
             this.PopulateNamespace();
         }
 

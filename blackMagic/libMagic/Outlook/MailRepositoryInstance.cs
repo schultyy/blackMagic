@@ -96,8 +96,12 @@ namespace libMagic.Outlook
                                                                  Subject = c.Subject,
                                                                  Sender = c.SenderEmailAddress,
                                                                  Recipients = Engine.Array.New(c.Recipients.Cast<Recipient>().Select(r => r.Address).ToArray()),
-                                                                 SendOn = c.SentOn,
-                                                                 ReceivedOn = c.ReceivedTime
+                                                                 SendOn = Engine.Date.Construct(c.SentOn.ToUniversalTime().Subtract(
+                                                                                                    new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))
+                                                                                                    .TotalMilliseconds),
+                                                                 ReceivedOn = Engine.Date.Construct(c.ReceivedTime.ToUniversalTime().Subtract(
+                                                                                                        new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))
+                                                                                                        .TotalMilliseconds)
                                                              }).ToArray();
                 return Engine.Array.New(mails);
             }
