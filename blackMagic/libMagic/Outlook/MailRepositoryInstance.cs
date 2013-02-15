@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Jurassic;
 using Jurassic.Library;
 using Microsoft.Office.Interop.Outlook;
 
-namespace blackMagic.Outlook
+namespace libMagic.Outlook
 {
     public class MailRepositoryInstance : ObjectInstance
     {
@@ -29,7 +27,7 @@ namespace blackMagic.Outlook
             {
                 folders = application.Session.Folders
                                 .Cast<Folder>()
-                                .Single(c => c.Name == root)
+                                .Single(c => c.Name == (string)root)
                                 .Folders.Cast<Folder>()
                                 .Select(c => c.Name)
                                 .ToArray();
@@ -49,7 +47,7 @@ namespace blackMagic.Outlook
                 .Single(c => c.Name == foldername)
                 .Folders
                 .Cast<Folder>()
-                .Select(c => folderConstructor.Construct(c.Name, c.EntryID))
+                .Select(c => folderConstructor.Construct(c.Name, c.EntryID, c.DefaultItemType.ToString()))
                 .ToArray();
             return Engine.Array.New(folders);
         }

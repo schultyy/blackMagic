@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using libMagic;
 using Exception = System.Exception;
 
 namespace blackMagic.ScriptConsole

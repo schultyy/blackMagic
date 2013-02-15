@@ -46,10 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO\FileHandle.cs" />
+    <Compile Include="Outlook\EMail.cs" />
+    <Compile Include="Outlook\FolderConstructor.cs" />
+    <Compile Include="Outlook\FolderInstance.cs" />
+    <Compile Include="Outlook\MailRepositoryConstructor.cs" />
     <Compile Include="Outlook\MailRepositoryInstance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptLoader.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

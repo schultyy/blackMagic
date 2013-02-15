@@ -1,6 +1,6 @@
 using Jurassic.Library;
 
-namespace blackMagic.Outlook
+namespace libMagic.Outlook
 {
     public class FolderInstance : ObjectInstance
     {
@@ -8,6 +8,10 @@ namespace blackMagic.Outlook
         public string UniqueId;
 
         public string Name { get; set; }
+
+        public string Type { get; set; }
+
+        public string FolderType { get; set; }
 
         public FolderInstance(ObjectInstance prototype)
             : base(prototype)

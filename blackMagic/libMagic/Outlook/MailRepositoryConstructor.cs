@@ -1,7 +1,7 @@
 using Jurassic;
 using Jurassic.Library;
 
-namespace blackMagic.Outlook
+namespace libMagic.Outlook
 {
     public class MailRepositoryConstructor : ClrFunction
     {
