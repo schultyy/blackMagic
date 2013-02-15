@@ -93,29 +93,16 @@ namespace libMagic.Outlook
                                             .Select(c => new EmailInstance(Engine.Object)
                                                              {
                                                                  UniqueId = c.EntryID,
-                                                                 Subject = c.Subject
+                                                                 Subject = c.Subject,
+                                                                 Sender = c.SenderEmailAddress,
+                                                                 Recipients = Engine.Array.New(c.Recipients.Cast<Recipient>().Select(r => r.Address).ToArray()),
+                                                                 SendOn = c.SentOn,
+                                                                 ReceivedOn = c.ReceivedTime
                                                              }).ToArray();
                 return Engine.Array.New(mails);
             }
 
             return Engine.Array.New();
-        }
-
-        [JSFunction(Name = "getMails")]
-        public ArrayInstance GetMails(string addressbook)
-        {
-            var folder = application.Session.Folders.Cast<Folder>().Single(c => c.Name == addressbook);
-            var mails = folder.Items.Cast<MailItem>()
-                .Select(c => new EmailInstance(null)
-                                 {
-                                     UniqueId = c.EntryID,
-                                     Subject = c.Subject,
-                                     Sender = c.SenderEmailAddress,
-                                     Recipients = c.Recipients.Cast<Recipient>().Select(r => r.Address).ToArray(),
-                                     SendOn = c.SentOn,
-                                     ReceivedOn = c.ReceivedTime
-                                 }).ToArray();
-            return Engine.Array.New(mails);
         }
     }
 }

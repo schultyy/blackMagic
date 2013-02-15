@@ -23,9 +23,9 @@ namespace libMagic.Outlook
             set { this.SetPropertyValue(() => Sender, value); }
         }
 
-        public string[] Recipients
+        public ArrayInstance Recipients
         {
-            get { return this.GetPropertyValue(() => Recipients) as string[]; }
+            get { return this.GetPropertyValue(() => Recipients) as ArrayInstance; }
             set { this.SetPropertyValue(() => Recipients, value); }
         }
 
