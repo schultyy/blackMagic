@@ -90,7 +90,7 @@ namespace libMagic.Outlook
             else
             {
                 var mails = thatFolder.Items.Cast<MailItem>()
-                                            .Select(c => new EMail(null)
+                                            .Select(c => new EmailInstance(Engine.Object)
                                                              {
                                                                  UniqueId = c.EntryID,
                                                                  Subject = c.Subject
@@ -106,7 +106,7 @@ namespace libMagic.Outlook
         {
             var folder = application.Session.Folders.Cast<Folder>().Single(c => c.Name == addressbook);
             var mails = folder.Items.Cast<MailItem>()
-                .Select(c => new EMail(null)
+                .Select(c => new EmailInstance(null)
                                  {
                                      UniqueId = c.EntryID,
                                      Subject = c.Subject
