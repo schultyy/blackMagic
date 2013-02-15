@@ -43,13 +43,20 @@ namespace libMagic.Outlook
 
             var folderConstructor = new FolderConstructor(Engine);
 
-            var folders = application.Session.Folders.Cast<Folder>()
-                .Single(c => c.Name == foldername)
+            var rootFolder = application.Session.Folders.Cast<Folder>()
+                .SingleOrDefault(c => c.Name == foldername);
+            if (rootFolder == null)
+                return Engine.Array.New();
+            var folders = rootFolder
                 .Folders
                 .Cast<Folder>()
+                .ToArray();
+            if (!folders.Any())
+                return Engine.Array.New();
+            var dtos = folders
                 .Select(c => folderConstructor.Construct(c.Name, c.EntryID, c.DefaultItemType.ToString()))
                 .ToArray();
-            return Engine.Array.New(folders);
+            return Engine.Array.New(dtos);
         }
 
         [JSFunction(Name = "getMails")]
