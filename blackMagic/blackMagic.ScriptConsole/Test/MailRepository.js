@@ -2,14 +2,23 @@
 
 var repository = new MailRepository();
 
-var folderNames = repository.getFolderNames("Personal Folders");
+var children = repository.getChildrenFor("Personal Folders");
 
-print("-------------------------------");
+var inbox = null;
 
-for (var i = 0; i < folderNames.length; i++ ) {
-    var folders = repository.getChildrenFor(folderNames[i]);
+for (var i = 0; i < children.length; i++) {
+    console.log(children[i].Name);
+    if (children[i].Name == mailFolder) {
+        inbox = children[i];
+        break;
+    }
+}
 
-    for (var x = 0; i < folders.length; x++) {
-        print(folders[x].toString());
-    }    
+if (inbox == null)
+    throw new Error("No inbox folder found");
+
+var items = repository.getMailsForFolder(inbox.UniqueId);
+
+for (var i = 0; i < items.length; i++) {
+    console.log(items[i].Subject);
 }

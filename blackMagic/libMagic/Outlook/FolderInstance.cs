@@ -4,26 +4,29 @@ namespace libMagic.Outlook
 {
     public class FolderInstance : ObjectInstance
     {
-        [JSField]
-        public string UniqueId;
+        public string UniqueId
+        {
+            get { return this.GetPropertyValue("UniqueId") as string; }
+            set { SetPropertyValue("UniqueId", value, true); }
+        }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return this.GetPropertyValue("Name") as string; }
+            set { SetPropertyValue("Name", value, true); }
+        }
 
-        public string Type { get; set; }
-
-        public string FolderType { get; set; }
+        public string FolderType
+        {
+            get { return GetPropertyValue("FolderType") as string; }
+            set { SetPropertyValue("FolderType", value, true); }
+        }
 
         public FolderInstance(ObjectInstance prototype)
             : base(prototype)
         {
             this.PopulateFields();
             this.PopulateFunctions();
-        }
-
-        [JSFunction(Name = "toString")]
-        public override string ToString()
-        {
-            return Name;
         }
     }
 }

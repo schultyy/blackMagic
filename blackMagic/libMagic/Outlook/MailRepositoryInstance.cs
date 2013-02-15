@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Jurassic;
 using Jurassic.Library;
@@ -57,6 +58,47 @@ namespace libMagic.Outlook
                 .Select(c => folderConstructor.Construct(c.Name, c.EntryID, c.DefaultItemType.ToString()))
                 .ToArray();
             return Engine.Array.New(dtos);
+        }
+
+        [JSFunction(Name = "getMailsForFolder")]
+        public ArrayInstance GetMailsForFolder(string uniqueId)
+        {
+            return GetMailsForFolderInternal(uniqueId, null);
+        }
+
+        private ArrayInstance GetMailsForFolderInternal(string uniqueId, Folder parent)
+        {
+            if (string.IsNullOrEmpty(uniqueId))
+                throw new ArgumentNullException("uniqueId");
+
+            Folder thatFolder = null;
+
+            IEnumerable<Folder> collection;
+
+            if (parent == null)
+                collection = application.Session.Folders.Cast<Folder>().ToArray();
+            else
+                collection = parent.Folders.Cast<Folder>().ToArray();
+
+            thatFolder = collection.SingleOrDefault(c => c.EntryID == uniqueId);
+
+            if (thatFolder == null)
+            {
+                foreach (var f in collection)
+                    return GetMailsForFolderInternal(uniqueId, f);
+            }
+            else
+            {
+                var mails = thatFolder.Items.Cast<MailItem>()
+                                            .Select(c => new EMail(null)
+                                                             {
+                                                                 UniqueId = c.EntryID,
+                                                                 Subject = c.Subject
+                                                             }).ToArray();
+                return Engine.Array.New(mails);
+            }
+
+            return Engine.Array.New();
         }
 
         [JSFunction(Name = "getMails")]

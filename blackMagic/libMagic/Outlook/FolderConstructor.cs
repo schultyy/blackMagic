@@ -16,11 +16,11 @@ namespace libMagic.Outlook
         public FolderInstance Construct(string name, string uniqueId, string folderType)
         {
             return new FolderInstance(InstancePrototype)
-                       {
-                           UniqueId = uniqueId,
-                           Name = name,
-                           FolderType = folderType
-                       };
+            {
+                UniqueId = uniqueId,
+                Name = name,
+                FolderType = folderType
+            };
         }
     }
 }
