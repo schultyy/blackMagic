@@ -101,7 +101,15 @@ namespace libMagic.Outlook
                                                                                                     .TotalMilliseconds),
                                                                  ReceivedOn = Engine.Date.Construct(c.ReceivedTime.ToUniversalTime().Subtract(
                                                                                                         new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))
-                                                                                                        .TotalMilliseconds)
+                                                                                                        .TotalMilliseconds),
+                                                                 Attachments = Engine.Array.New(c.Attachments.Cast<Attachment>()
+                                                                 .Select(a => new AttachmentInstance(Engine.Object)
+                                                                                  {
+                                                                                      DisplayName = a.DisplayName,
+                                                                                      Filename = a.FileName,
+                                                                                      Index = a.Index,
+                                                                                      Size = a.Size
+                                                                                  }).ToArray())
                                                              }).ToArray();
                 return Engine.Array.New(mails);
             }

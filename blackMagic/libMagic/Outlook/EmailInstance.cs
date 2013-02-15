@@ -41,10 +41,16 @@ namespace libMagic.Outlook
             set { this.SetPropertyValue(() => SendOn, value); }
         }
 
+        public ArrayInstance Attachments
+        {
+            get { return this.GetPropertyValue(() => Attachments) as ArrayInstance; }
+            set { this.SetPropertyValue(() => Attachments, value); }
+        }
+
         public EmailInstance(ObjectInstance prototype)
             : base(prototype)
         {
-
+            Attachments = Engine.Array.New();
         }
     }
 }

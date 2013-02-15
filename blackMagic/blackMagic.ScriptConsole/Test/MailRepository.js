@@ -20,9 +20,18 @@ if (inbox == null)
 var items = repository.getMailsForFolder(inbox.UniqueId);
 
 for (var i = 0; i < items.length; i++) {
+
+    if (items[i].Attachments.length == 0)
+        continue;
+
     console.log("Subject: " + items[i].Subject);
     console.log("Send from: " + items[i].Sender);
     console.log("Recipients: " + items[i].Recipients.join());
     console.log("SendOn: " + items[i].SentOn);
     console.log("Received on: " + items[i].ReceivedOn);
+    console.log("-------------------------------------");
+
+    for (var x = 0; x < items[i].Attachments.length; x++) {
+        console.log("Filename: " + items[i].Attachments[x].Filename);
+    }
 }
