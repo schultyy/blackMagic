@@ -1,10 +1,6 @@
 ﻿var mailFolder = "Inbox";
 
-print(mailFolder);
-
 var repository = new MailRepository();
-
-print(repository);
 
 var folderNames = repository.getFolderNames(null);
 

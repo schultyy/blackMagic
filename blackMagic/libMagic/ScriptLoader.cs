@@ -17,6 +17,8 @@ namespace libMagic
         {
             engine.SetGlobalValue("MailRepository", new Outlook.MailRepositoryConstructor(engine));
 
+            engine.SetGlobalFunction("read", new Func<string>(Console.ReadLine));
+
             engine.SetGlobalFunction("print", new Action<string>(Console.WriteLine));
         }
 
