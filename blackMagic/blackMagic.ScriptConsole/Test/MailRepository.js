@@ -33,5 +33,7 @@ for (var i = 0; i < items.length; i++) {
 
     for (var x = 0; x < items[i].Attachments.length; x++) {
         console.log("Filename: " + items[i].Attachments[x].Filename);
+        //public void SaveAttachment(string mailUniqueId, AttachmentInstance attachment, string filename)
+        repository.saveAttachment(items[i].UniqueId, items[i].Attachments[x], "C:\\temp\\hello.md");
     }
 }

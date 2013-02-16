@@ -66,6 +66,44 @@ namespace libMagic.Outlook
             return GetMailsForFolderInternal(uniqueId, null);
         }
 
+        [JSFunction(Name = "saveAttachment")]
+        public void SaveAttachment(string mailUniqueId, AttachmentInstance attachment, string filename)
+        {
+            if (string.IsNullOrEmpty(mailUniqueId))
+                throw new ArgumentNullException("mailUniqueId");
+
+            if (attachment == null)
+                throw new ArgumentNullException("attachment");
+            foreach (var rootFolder in application.Session.Folders.Cast<Folder>())
+                if (SaveAttachmentInternal(rootFolder, mailUniqueId, attachment, filename))
+                    break;
+        }
+
+        private bool SaveAttachmentInternal(Folder parent, string mailUniqueId, AttachmentInstance attachmentInstance, string filename)
+        {
+            var mailItemFound = false;
+            MailItem mail = null;
+
+            if (parent.Items.GetFirst() is MailItem)
+                mail = parent.Items.Cast<MailItem>().SingleOrDefault(c => c.EntryID == mailUniqueId);
+
+            if (mail == null)
+            {
+                foreach (Folder childFolder in parent.Folders)
+                    if (SaveAttachmentInternal(childFolder, mailUniqueId, attachmentInstance, filename))
+                        return true;
+            }
+            else
+            {
+                var attachment = mail.Attachments.Cast<Attachment>().SingleOrDefault(c => c.Index == attachmentInstance.Index);
+                if (attachment == null)
+                    throw new ArgumentException(string.Format("No attachment {0} found", attachmentInstance.Filename));
+                attachment.SaveAsFile(filename);
+                return true;
+            }
+            return false;
+        }
+
         private ArrayInstance GetMailsForFolderInternal(string uniqueId, Folder parent)
         {
             if (string.IsNullOrEmpty(uniqueId))
