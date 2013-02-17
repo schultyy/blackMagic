@@ -36,4 +36,5 @@ for (var i = 0; i < items.length; i++) {
         //public void SaveAttachment(string mailUniqueId, AttachmentInstance attachment, string filename)
         repository.saveAttachment(items[i].UniqueId, items[i].Attachments[x], "C:\\temp\\hello.md");
     }
+    repository.saveEmail(items[i].UniqueId, "C:\\temp\\" + items[i].Subject + ".msg");
 }

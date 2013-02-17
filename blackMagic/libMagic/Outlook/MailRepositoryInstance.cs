@@ -9,7 +9,7 @@ namespace libMagic.Outlook
 {
     public class MailRepositoryInstance : ObjectInstance
     {
-        private Application application;
+        private readonly Application application;
 
         public MailRepositoryInstance(ObjectInstance prototype)
             : base(prototype)
@@ -74,11 +74,38 @@ namespace libMagic.Outlook
 
             if (attachment == null)
                 throw new ArgumentNullException("attachment");
-            foreach (var rootFolder in application.Session.Folders.Cast<Folder>().Where(rootFolder => SaveAttachmentInternal(rootFolder, mailUniqueId, attachment, filename)))
-                break;
+
+
+            foreach (var rootFolder in application.Session.Folders.Cast<Folder>())
+            {
+                if (EnumerateMailFolders(rootFolder, mailUniqueId, (mail =>
+                                                                   {
+
+                                                                       var attachmentYouSearchedFor = mail.Attachments.
+                                                                           Cast<Attachment>()
+                                                                           .SingleOrDefault(
+                                                                               c => c.Index == attachment.Index);
+                                                                       if (attachmentYouSearchedFor == null)
+                                                                           throw new ArgumentException(
+                                                                               string.Format("No attachment {0} found",
+                                                                                             attachment.Filename));
+                                                                       attachmentYouSearchedFor.SaveAsFile(filename);
+                                                                   })))
+                    break;
+            }
         }
 
-        private bool SaveAttachmentInternal(Folder parent, string mailUniqueId, AttachmentInstance attachmentInstance, string filename)
+        [JSFunction(Name = "saveEmail")]
+        public void SaveEmail(string mailUniqueId, string filename)
+        {
+            foreach (var rootFolder in application.Session.Folders.Cast<Folder>())
+                if (EnumerateMailFolders(rootFolder, mailUniqueId, mail => mail.SaveAs(filename)))
+                    break;
+        }
+
+        private bool EnumerateMailFolders(Folder parent,
+                                            string mailUniqueId,
+                                            Action<MailItem> mailAction)
         {
             MailItem mail = null;
 
@@ -86,14 +113,11 @@ namespace libMagic.Outlook
                 mail = parent.Items.Cast<MailItem>().SingleOrDefault(c => c.EntryID == mailUniqueId);
 
             if (mail == null)
-                return
-                    parent.Folders.Cast<Folder>().Any(
-                        childFolder => SaveAttachmentInternal(childFolder, mailUniqueId, attachmentInstance, filename));
-
-            var attachment = mail.Attachments.Cast<Attachment>().SingleOrDefault(c => c.Index == attachmentInstance.Index);
-            if (attachment == null)
-                throw new ArgumentException(string.Format("No attachment {0} found", attachmentInstance.Filename));
-            attachment.SaveAsFile(filename);
+            {
+                var childFolders = parent.Folders.Cast<Folder>();
+                return childFolders.Any(childFolder => EnumerateMailFolders(childFolder, mailUniqueId, mailAction));
+            }
+            mailAction(mail);
             return true;
         }
 
