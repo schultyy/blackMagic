@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blackMagic.ScriptConsole", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libMagic", "libMagic\libMagic.csproj", "{CA116A18-3CCF-4D9A-A44F-3B3972E6CC4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blackMagic.Test", "blackMagic.Test\blackMagic.Test.csproj", "{13BF46BF-2012-4005-81D3-DE6C61382387}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{CA116A18-3CCF-4D9A-A44F-3B3972E6CC4D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{CA116A18-3CCF-4D9A-A44F-3B3972E6CC4D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CA116A18-3CCF-4D9A-A44F-3B3972E6CC4D}.Release|x86.ActiveCfg = Release|Any CPU
+		{13BF46BF-2012-4005-81D3-DE6C61382387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13BF46BF-2012-4005-81D3-DE6C61382387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13BF46BF-2012-4005-81D3-DE6C61382387}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{13BF46BF-2012-4005-81D3-DE6C61382387}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{13BF46BF-2012-4005-81D3-DE6C61382387}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{13BF46BF-2012-4005-81D3-DE6C61382387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13BF46BF-2012-4005-81D3-DE6C61382387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13BF46BF-2012-4005-81D3-DE6C61382387}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{13BF46BF-2012-4005-81D3-DE6C61382387}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{13BF46BF-2012-4005-81D3-DE6C61382387}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
