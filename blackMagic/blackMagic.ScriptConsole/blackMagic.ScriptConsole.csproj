@@ -60,20 +60,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Test\MailRepository.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\libMagic\libMagic.csproj">
       <Project>{CA116A18-3CCF-4D9A-A44F-3B3972E6CC4D}</Project>
       <Name>libMagic</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Test\InOut.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

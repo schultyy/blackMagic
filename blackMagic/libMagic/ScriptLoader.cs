@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Jurassic;
 
 namespace libMagic
@@ -19,7 +20,6 @@ namespace libMagic
 
             engine.SetGlobalFunction("read", new Func<string>(Console.ReadLine));
 
-            //engine.SetGlobalFunction("print", new Action<string>(Console.WriteLine));
             engine.SetGlobalValue("console", new Jurassic.Library.FirebugConsole(engine));
         }
 
