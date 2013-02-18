@@ -47,6 +47,12 @@ namespace libMagic.Outlook
             set { this.SetPropertyValue(() => Attachments, value); }
         }
 
+        public string SenderName
+        {
+            get { return this.GetPropertyValue(() => SenderName) as string; }
+            set { this.SetPropertyValue(() => SenderName, value); }
+        }
+
         public EmailInstance(ObjectInstance prototype)
             : base(prototype)
         {

@@ -149,6 +149,7 @@ namespace libMagic.Outlook
                                                              {
                                                                  UniqueId = c.EntryID,
                                                                  Subject = c.Subject,
+                                                                 SenderName = c.SenderName,
                                                                  Sender = c.SenderEmailAddress,
                                                                  Recipients = Engine.Array.New(c.Recipients.Cast<Recipient>().Select(r => r.Address).ToArray()),
                                                                  SendOn = Engine.Date.Construct(c.SentOn.ToUniversalTime().Subtract(

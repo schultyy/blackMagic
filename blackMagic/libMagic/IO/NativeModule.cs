@@ -38,5 +38,20 @@ namespace libMagic.IO
         {
             return System.IO.File.Exists(path);
         }
+
+        [JSFunction(Name = "combine")]
+        public string Combine(ArrayInstance pathParts)
+        {
+            var str = pathParts.ElementValues
+                .Select(c => c.ToString())
+                .ToArray();
+            return System.IO.Path.Combine(str);
+        }
+
+        [JSFunction(Name = "createDirectory")]
+        public void CreateDirectory(string directoryName)
+        {
+            System.IO.Directory.CreateDirectory(directoryName);
+        }
     }
 }
