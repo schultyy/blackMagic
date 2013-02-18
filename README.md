@@ -2,9 +2,15 @@ blackMagic
 ==========
 
 Dude, this uses the dark side of the force. 
-Provides basic JavaScript access to the Outlook 2007 Object model. 
-# API
+Provides basic JavaScript access to the Outlook 2007 Object model. I created this project to have quick access to the Outlook API without writing a full blown .Net program. 
 
+# Dependencies
+## Jurassic
+JavaScript compiler
+## nunit
+## Office Interop Assemblies for Office 2007
+
+# API
 ## MailRepository
 ### Instantiation
 var repository = new MailRepository();
