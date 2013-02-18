@@ -12,10 +12,11 @@ namespace blackMagic.ScriptConsole
         {
             Console.WriteLine("blackMagic");
 
-            Console.WriteLine("Dude, this is the dark side of the force");
-
             if (args.Length == 0)
             {
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.WriteLine("No input file specified");
+                Console.ForegroundColor = ConsoleColor.White;
 #if DEBUG
                 Console.ReadLine();
 #endif

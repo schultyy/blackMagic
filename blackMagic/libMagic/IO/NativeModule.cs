@@ -26,5 +26,17 @@ namespace libMagic.IO
         {
             System.IO.File.WriteAllText(filename, content);
         }
+
+        [JSFunction(Name = "directoryExists")]
+        public bool DirectoryExists(string path)
+        {
+            return System.IO.Directory.Exists(path);
+        }
+
+        [JSFunction(Name = "fileExists")]
+        public bool FileExists(string path)
+        {
+            return System.IO.File.Exists(path);
+        }
     }
 }

@@ -58,6 +58,9 @@
     <Compile Include="ScriptLoader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Builtin\fs.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Builtin\require.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
