@@ -1,6 +1,6 @@
 ﻿function require(moduleName) {
 
-    var path = "./lib/" + moduleName + ".js";
+    var path = "./Builtin/" + moduleName + ".js";
 
     var fileContent = nativeModule.readFileSync(path);
 

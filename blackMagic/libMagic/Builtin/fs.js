@@ -1,11 +1,9 @@
-﻿exports.fs = {
-    readFileSync: function (filename) {
-        return nativeModule.readFileSync(path);
-    },
-    writeFileSync: function (filename, content) {
-        nativeModule.writeFileSync(path, content);
-    },
-    exists: function (path) {
-        return nativeModule.fileExists(path) || nativeModule.directoryExists(path);
-    }
-}
+﻿exports.readFileSync = function(filename) {
+    return nativeModule.readFileSync(path);
+};
+exports.writeFileSync = function(filename, content) {
+    nativeModule.writeFileSync(path, content);
+};
+exports.exists = function(path) {
+    return nativeModule.fileExists(path) || nativeModule.directoryExists(path);
+};
