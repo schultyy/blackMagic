@@ -4,6 +4,9 @@
 
     var fileContent = nativeModule.readFileSync(path);
 
+    var exports = {};
+
     var module = eval(fileContent);
-    return module.exports;
+
+    return exports;
 }

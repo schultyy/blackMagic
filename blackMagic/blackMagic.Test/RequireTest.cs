@@ -18,7 +18,9 @@ namespace blackMagic.Test
         public void Setup()
         {
             engine = new ScriptEngine();
+            engine.EnableDebugging = true;
             engine.SetGlobalValue("nativeModule", new NativeModuleInstance(engine));
+            engine.SetGlobalValue("console", new FirebugConsole(engine));
 
             engine.ExecuteFile("./Builtin/require.js");
         }
@@ -26,8 +28,9 @@ namespace blackMagic.Test
         [Test]
         public void CheckRequireIsExistent()
         {
-            var require = engine.GetGlobalValue<FunctionInstance>("require");
+            var require = engine.GetGlobalValue("require");
             Assert.IsNotNull(require);
+            Assert.IsTrue(require is FunctionInstance);
         }
 
         [Test]
@@ -41,9 +44,17 @@ namespace blackMagic.Test
         [Test]
         public void RequireMathModule()
         {
-            var mathModule = engine.Evaluate("require('math');");
+            var mathModule = engine.Evaluate(@"require('math');");
 
-            Assert.IsNotNull(mathModule);
+            Assert.AreNotEqual(Undefined.Value, mathModule);
+            Assert.IsTrue(mathModule is ObjectInstance);
+            var addMember = ((ObjectInstance)mathModule).GetPropertyValue("add");
+
+            Assert.IsNotNull(addMember);
+            Assert.IsFalse(addMember == Undefined.Value);
+
+            var result = Convert.ToInt32(((FunctionInstance)addMember).Call(addMember, 1, 2));
+            Assert.IsTrue(result == 3);
         }
     }
 }
