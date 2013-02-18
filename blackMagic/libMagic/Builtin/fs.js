@@ -1,5 +1,5 @@
 ﻿exports.readFileSync = function(filename) {
-    return nativeModule.readFileSync(path);
+    return nativeModule.readFileSync(filename);
 };
 exports.writeFileSync = function(filename, content) {
     nativeModule.writeFileSync(path, content);

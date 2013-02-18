@@ -17,8 +17,7 @@ namespace blackMagic.Test
         [SetUp]
         public void Setup()
         {
-            engine = new ScriptEngine();
-            engine.EnableDebugging = true;
+            engine = new ScriptEngine { EnableDebugging = true };
             engine.SetGlobalValue("nativeModule", new NativeModuleInstance(engine));
             engine.SetGlobalValue("console", new FirebugConsole(engine));
             engine.SetGlobalFunction("native_require", new Func<string, ObjectInstance>(identifier =>
