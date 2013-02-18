@@ -23,7 +23,33 @@ Saves an email as msg file to disk
 Provides basic file system access
 ### Usage
 var fs = require("fs");
-### readFileSync
-### writeFileSync
-### exists
+### readFileSync (string filename)
+### writeFileSync (string filename, string content)
+### exists (string path)
 Tests, if a certain file or path exists
+### createDirectory (string directoryName)
+Creates a new directory
+### combine (string[] paths)
+Combines an array of paths to a valid directory or file identifier.
+## Folder
+### Name (string)
+### UniqueId (string)
+### FolderType (string)
+## Email
+### UniqueId (string)
+### Subject (string)
+### Sender (string)
+Sender's email address
+### SenderName (string)
+Sender's display name
+### Recipients (string[])
+Collection of recipients (email addresses only)
+### ReceivedOn (date)
+### SendOn (date)
+### Attachments (Attachment[])
+Collection of attachments that belong to a certain email
+## Attachment
+### Displayname (string)
+### Filename (string)
+### Size (int)
+### Index (int)
