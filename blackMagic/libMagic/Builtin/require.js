@@ -1,4 +1,6 @@
-﻿function require(moduleName) {
+﻿var nativeModule = native_require("nativeModule");
+
+function require(moduleName) {
 
     var path = "./Builtin/" + moduleName + ".js";
 

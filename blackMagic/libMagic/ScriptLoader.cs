@@ -2,6 +2,7 @@
 using System.Linq;
 using System.IO;
 using Jurassic;
+using Jurassic.Library;
 using libMagic.IO;
 
 namespace libMagic
@@ -22,10 +23,20 @@ namespace libMagic
 
             engine.SetGlobalFunction("read", new Func<string>(Console.ReadLine));
 
-            engine.SetGlobalValue("console", new Jurassic.Library.FirebugConsole(engine));
+            engine.SetGlobalValue("console", new FirebugConsole(engine));
 
-            engine.SetGlobalValue("nativeModule", new NativeModuleInstance(engine));
-
+            //for native modules, we use native_require to keep global namespace tidy
+            engine.SetGlobalFunction("native_require", new Func<string, ObjectInstance>(identifier =>
+                                                                                           {
+                                                                                               switch (identifier)
+                                                                                               {
+                                                                                                   case "nativeModule":
+                                                                                                       return new NativeModuleInstance(engine);
+                                                                                                   default:
+                                                                                                       throw new ArgumentOutOfRangeException(string.Format("Unsupported module name: {0}", identifier));
+                                                                                               }
+                                                                                           }));
+            //Require must be globally available
             engine.ExecuteFile("Builtin\\require.js");
         }
 

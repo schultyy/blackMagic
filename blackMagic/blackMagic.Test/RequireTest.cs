@@ -21,6 +21,16 @@ namespace blackMagic.Test
             engine.EnableDebugging = true;
             engine.SetGlobalValue("nativeModule", new NativeModuleInstance(engine));
             engine.SetGlobalValue("console", new FirebugConsole(engine));
+            engine.SetGlobalFunction("native_require", new Func<string, ObjectInstance>(identifier =>
+            {
+                switch (identifier)
+                {
+                    case "nativeModule":
+                        return new NativeModuleInstance(engine);
+                    default:
+                        throw new ArgumentOutOfRangeException(string.Format("Unsupported module name: {0}", identifier));
+                }
+            }));
 
             engine.ExecuteFile("./Builtin/require.js");
         }
