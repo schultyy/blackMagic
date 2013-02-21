@@ -41,11 +41,13 @@ Returns child folders for a certain folder. If the certain folder has no childre
 Returns a collection of mails for a certain folder.
 ### saveAttachment (string mailUniqueId, AttachmentInstance attachment, string filename)
 Saves an attachment to disk.
+### deleteAttachment (string mailUniqueId, AttachmentInstance attachment)
+Deletes attachment from a specific mail.
 ### saveEmail(string mailUniqueId, string filename)
-Saves an email as msg file to disk
+Saves an email as msg file to disk.
 ## File system
 ### Remarks
-Provides basic file system access
+Provides basic file system access.
 ### Usage
 ```JavaScript
 var fs = require("fs");
@@ -53,9 +55,9 @@ var fs = require("fs");
 ### readFileSync (string filename)
 ### writeFileSync (string filename, string content)
 ### exists (string path)
-Tests, if a certain file or path exists
+Tests, if a certain file or path exists.
 ### createDirectory (string directoryName)
-Creates a new directory
+Creates a new directory.
 ### combine (string[] paths)
 Combines an array of paths to a valid directory or file identifier.
 ## Folder
@@ -70,11 +72,11 @@ Sender's email address
 ### SenderName (string)
 Sender's display name
 ### Recipients (string[])
-Collection of recipients (email addresses only)
+Collection of recipients (email addresses only).
 ### ReceivedOn (date)
 ### SendOn (date)
 ### Attachments (Attachment[])
-Collection of attachments that belong to a certain email
+Collection of attachments that belong to a certain email.
 ## Attachment
 ### Displayname (string)
 ### Filename (string)
