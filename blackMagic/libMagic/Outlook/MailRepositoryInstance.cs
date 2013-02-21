@@ -80,7 +80,6 @@ namespace libMagic.Outlook
             {
                 if (EnumerateMailFolders(rootFolder, mailUniqueId, (mail =>
                                                                    {
-
                                                                        var attachmentYouSearchedFor = mail.Attachments.
                                                                            Cast<Attachment>()
                                                                            .SingleOrDefault(
@@ -91,6 +90,32 @@ namespace libMagic.Outlook
                                                                                              attachment.Filename));
                                                                        attachmentYouSearchedFor.SaveAsFile(filename);
                                                                    })))
+                    break;
+            }
+        }
+
+        [JSFunction(Name = "deleteAttachment")]
+        public void DeleteAttachment(string mailUniqueId, AttachmentInstance attachment)
+        {
+            if (string.IsNullOrEmpty(mailUniqueId))
+                throw new ArgumentNullException("mailUniqueId");
+
+            if (attachment == null)
+                throw new ArgumentNullException("attachment");
+
+            foreach (var rootFolder in application.Session.Folders.Cast<Folder>())
+            {
+                if (EnumerateMailFolders(rootFolder, mailUniqueId, mail =>
+                                                                      {
+                                                                          var attachmentYouSearchedFor = mail.Attachments
+                                                                                                .Cast<Attachment>()
+                                                                                                .SingleOrDefault(c => c.Index == attachment.Index);
+                                                                          if (attachmentYouSearchedFor == null)
+                                                                              throw new ArgumentException(
+                                                                                  string.Format("No attachment {0} found",
+                                                                                                attachment.Filename));
+                                                                          attachmentYouSearchedFor.Delete();
+                                                                      }))
                     break;
             }
         }
