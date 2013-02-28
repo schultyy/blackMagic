@@ -52,6 +52,7 @@ Updates an email (Currently it updates Subject and BodyText).
 Send an email to n recipients.
 Example:
 ```JavaScript
+//At the moment only these three properties are supported
 repository.sendEmail({
 	"Subject" : "Ohai",
 	"Recipients" : "johndoe@example.com",
