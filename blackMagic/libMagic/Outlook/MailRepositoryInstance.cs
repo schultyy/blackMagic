@@ -145,6 +145,16 @@ namespace libMagic.Outlook
         {
             MailItem newMail = application.CreateItem(OlItemType.olMailItem);
 
+            var requiredProperties = new[] { "BodyText", "Subject", "Recipients" };
+
+            foreach (var requiredProperty in requiredProperties)
+            {
+                if (email.HasProperty(requiredProperty))
+                    continue;
+                throw new ArgumentException(string.Format("Property {0} is mandatory", requiredProperty));
+            }
+
+
             newMail.Body = email.GetPropertyValue("BodyText").ToString();
             newMail.Subject = email.GetPropertyValue("Subject").ToString();
 
