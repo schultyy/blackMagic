@@ -48,6 +48,17 @@ repository.getMailsForFolder({'FolderName' : 'Personal Folders/Inbox' });
 ```
 ### updateEmail(Email mail)
 Updates an email (Currently it updates Subject and BodyText).
+### sendEmail(Email mail)
+Send an email to n recipients.
+Example:
+```JavaScript
+repository.sendEmail({
+	"Subject" : "Ohai",
+	"Recipients" : "johndoe@example.com",
+	"BodyText" : "Woah, this really seems to work"
+});
+You can also send this one to more recipients. Just separate the addresses by comma.
+```
 ### saveAttachment (string mailUniqueId, AttachmentInstance attachment, string filename)
 Saves an attachment to disk.
 ### deleteAttachment (string mailUniqueId, AttachmentInstance attachment)
