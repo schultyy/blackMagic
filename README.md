@@ -46,6 +46,8 @@ Example:
 ```JavaScript
 repository.getMailsForFolder({'FolderName' : 'Personal Folders/Inbox' });
 ```
+### updateEmail(Email mail)
+Updates an email (Currently it updates Subject and BodyText).
 ### saveAttachment (string mailUniqueId, AttachmentInstance attachment, string filename)
 Saves an attachment to disk.
 ### deleteAttachment (string mailUniqueId, AttachmentInstance attachment)
