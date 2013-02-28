@@ -140,6 +140,22 @@ namespace libMagic.Outlook
             }
         }
 
+        [JSFunction(Name = "sendEmail")]
+        public void SendEmail(ObjectInstance email)
+        {
+            MailItem newMail = application.CreateItem(OlItemType.olMailItem);
+
+            newMail.Body = email.GetPropertyValue("BodyText").ToString();
+            newMail.Subject = email.GetPropertyValue("Subject").ToString();
+
+            var recipients = email.GetPropertyValue("Recipients").ToString().Split(',');
+
+            foreach (var rec in recipients.Select(recipient => newMail.Recipients.Add(recipient)))
+                rec.Resolve();
+
+            newMail.Send();
+        }
+
         [JSFunction(Name = "saveEmail")]
         public void SaveEmail(string mailUniqueId, string filename)
         {
