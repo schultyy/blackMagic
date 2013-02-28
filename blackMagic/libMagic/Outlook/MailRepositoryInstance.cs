@@ -128,6 +128,22 @@ namespace libMagic.Outlook
                     break;
         }
 
+        [JSFunction(Name = "updateEmail")]
+        public void UpdateEmail(EmailInstance emailInstance)
+        {
+            foreach (var rootFolder in application.Session.Folders.Cast<Folder>())
+            {
+                if (EnumerateMailFolders(rootFolder, emailInstance.UniqueId, mail =>
+                                                                                {
+                                                                                    mail.Subject = emailInstance.Subject;
+                                                                                    mail.Body = emailInstance.BodyText;
+
+                                                                                    mail.Save();
+                                                                                }))
+                    break;
+            }
+        }
+
         private bool EnumerateMailFolders(Folder parent,
                                             string mailUniqueId,
                                             Action<MailItem> mailAction)

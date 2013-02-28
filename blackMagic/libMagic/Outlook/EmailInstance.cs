@@ -53,6 +53,12 @@ namespace libMagic.Outlook
             set { this.SetPropertyValue(() => SenderName, value); }
         }
 
+        public string BodyText
+        {
+            get { return this.GetPropertyValue(() => BodyText) as string; }
+            set { this.SetPropertyValue(() => BodyText, value); }
+        }
+
         public EmailInstance(ObjectInstance prototype)
             : base(prototype)
         {
