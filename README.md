@@ -37,8 +37,15 @@ var repository = new MailRepository();
 If root is null, then returns root level folder names.
 ### getChildrenFor (string folderName)
 Returns child folders for a certain folder. If the certain folder has no children, an empty array will be returned.
-### getMailsForFolder (string uniqueId)
+### getMailsForFolder (object parameters)
 Returns a collection of mails for a certain folder.
+This accepts an object with either a property 'UniqueId' or 'FolderName'. If you pass in the unique id, the folder tree gets enumerated to find the folder.
+If you pass in a folder name, you need to specify the complete path to your folder. 
+
+Example:
+```JavaScript
+repository.getMailsForFolder({'FolderName' : 'Personal Folders/Inbox' });
+```
 ### saveAttachment (string mailUniqueId, AttachmentInstance attachment, string filename)
 Saves an attachment to disk.
 ### deleteAttachment (string mailUniqueId, AttachmentInstance attachment)
