@@ -143,16 +143,18 @@ namespace libMagic.Outlook
         [JSFunction(Name = "sendEmail")]
         public void SendEmail(ObjectInstance email)
         {
-            MailItem newMail = application.CreateItem(OlItemType.olMailItem);
+            if (email == null)
+                throw new ArgumentNullException("email");
 
-            var requiredProperties = new[] { "BodyText", "Subject", "Recipients" };
-
-            foreach (var requiredProperty in requiredProperties)
+            foreach (var requiredProperty in new[] { "BodyText", "Subject", "Recipients" })
             {
                 if (email.HasProperty(requiredProperty))
                     continue;
                 throw new ArgumentException(string.Format("Property {0} is mandatory", requiredProperty));
             }
+
+            MailItem newMail = application.CreateItem(OlItemType.olMailItem);
+
 
 
             newMail.Body = email.GetPropertyValue("BodyText").ToString();
