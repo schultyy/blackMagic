@@ -61,9 +61,29 @@ namespace libMagic.Outlook
         }
 
         [JSFunction(Name = "getMailsForFolder")]
-        public ArrayInstance GetMailsForFolder(string uniqueId)
+        public ArrayInstance GetMailsForFolder(ObjectInstance parameters)
         {
-            return GetMailsForFolderInternal(uniqueId, null);
+            if (parameters.HasProperty("uniqueId"))
+                return GetMailsForFolderInternal(parameters.GetPropertyValue("uniqueId").ToString(), null);
+
+            if (parameters.HasProperty("folderName"))
+            {
+                var folderPath = parameters.GetPropertyValue("folderName").ToString().Split('/');
+
+                if (folderPath.Length != 2)
+                    throw new NotSupportedException("At the moment only paths like 'Personal Folders/Foo' are supported");
+
+                var root = folderPath.First();
+                var folderName = folderPath.Last();
+
+                var children = GetChildrenFor(root);
+                foreach (FolderInstance child in children.ElementValues.Cast<FolderInstance>()
+                                                            .Where(child => child.GetPropertyValue("Name").ToString() == folderName))
+                    return GetMailsForFolderInternal(child.GetPropertyValue("UniqueId").ToString(), null);
+                return Engine.Array.New();
+            }
+
+            throw new NotSupportedException(string.Format("Requires an object with either 'uniqueId' or 'folderName' as parameter"));
         }
 
         [JSFunction(Name = "saveAttachment")]
