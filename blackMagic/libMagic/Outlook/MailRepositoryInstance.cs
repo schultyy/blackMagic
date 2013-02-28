@@ -206,6 +206,7 @@ namespace libMagic.Outlook
             else
             {
                 var mails = thatFolder.Items.Cast<MailItem>()
+                                            .OrderByDescending(c => c.ReceivedTime)
                                             .Select(c => new EmailInstance(Engine.Object)
                                                              {
                                                                  UniqueId = c.EntryID,
