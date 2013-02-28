@@ -58,7 +58,6 @@ repository.sendEmail({
 	"Recipients" : "johndoe@example.com",
 	"BodyText" : "Woah, this really seems to work"
 });
-You can also send this one to more recipients. Just separate the addresses by comma.
 ```
 ### saveAttachment (string mailUniqueId, AttachmentInstance attachment, string filename)
 Saves an attachment to disk.
