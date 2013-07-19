@@ -48,7 +48,12 @@
   <ItemGroup>
     <Compile Include="Extensions.cs" />
     <Compile Include="IO\NativeModule.cs" />
+    <Compile Include="Outlook\AttachmentConstructor.cs" />
     <Compile Include="Outlook\AttachmentInstance.cs" />
+    <Compile Include="Outlook\ContactConstructor.cs" />
+    <Compile Include="Outlook\ContactInstance.cs" />
+    <Compile Include="Outlook\ContactRepositoryConstructor.cs" />
+    <Compile Include="Outlook\ContactRepositoryInstance.cs" />
     <Compile Include="Outlook\EmailInstance.cs" />
     <Compile Include="Outlook\FolderConstructor.cs" />
     <Compile Include="Outlook\FolderInstance.cs" />

@@ -20,7 +20,7 @@ namespace libMagic
         private void PopulateNamespace()
         {
             engine.SetGlobalValue("MailRepository", new Outlook.MailRepositoryConstructor(engine));
-
+            engine.SetGlobalValue("ContactRepository", new Outlook.ContactRepositoryConstructor(engine));
             engine.SetGlobalFunction("read", new Func<string>(Console.ReadLine));
 
             engine.SetGlobalValue("console", new FirebugConsole(engine));
